@@ -1,4 +1,16 @@
 # umlang-python-converter
 
-파이썬 엄랭 변환기 특
-완성 안됨
+<img src="./download.jpeg">
+
+엄...
+
+
+어떻게 사람 이름이 엄준식? ㅋㅋ
+
+####To-do list
+
+
+- [x] print (m)
+- [ ] variable
+- [ ] condition
+- [ ] loop

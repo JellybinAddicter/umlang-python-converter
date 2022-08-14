@@ -31,12 +31,11 @@ except:
     print('This python code is invalid.')
     quit()
 
+
+
 python_code_splited = python_code.split('\n')
-
 line = len(python_code_splited)
-
 isInPrint = False
-
 isPrinted = False
 
 # print code
