@@ -2,7 +2,7 @@ from print_converter import isPrint, printParameter, python_to_umlang_print
 import sys
 from io import StringIO
 
-from variable_converter import isVariable
+from variable_converter import isVariable, python_to_umlang_variable
 
 print('input all python code and enter {end} to finish')
 
@@ -39,7 +39,7 @@ python_code_splited = python_code.split('\n')
 line_count = len(python_code_splited)
 isPrinted = False
 variable_id = 0
-variable = {}
+variable_stored = {}
 
 for i in range(line_count):
     # print code
@@ -47,7 +47,7 @@ for i in range(line_count):
     if isPrint(python_code_splited[i]):
         # to prevent case like print("print()"), check if it is in print()    
         if isPrinted:
-            print('식'+('.'*10)+'ㅋ')
+            print('식ㅋ')
 
         S = printParameter(i, line_count, python_code_splited)
         python_to_umlang_print(S)
@@ -55,17 +55,8 @@ for i in range(line_count):
 
     elif isVariable(python_code_splited[i]):
         print('엄', end='')
-        print('어'*variable_id)
-        line_splited = python_code_splited[i].split('=')
-        variable_value = line_splited[-1]
-        if variable_value[0] == '"' or variable_value[0] == "'":
-            variable[line_splited[0]] = [variable_id, line_splited[-1]]
-        else:
-            try:
-                variable[line_splited[0]] = [variable_id, int(line_splited[-1])]
-            except(ValueError):
-                variable[line_splited[0]] = [variable_id, variable[variable_value][1]]
-        print(variable)
+        print('어'*variable_id,end='')
+        python_to_umlang_variable(python_code_splited[i], variable_stored, variable_id)
         variable_id += 1
 
 print('이 사람이름이냐ㅋㅋ')
