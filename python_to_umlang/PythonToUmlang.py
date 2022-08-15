@@ -1,4 +1,4 @@
-from print_converter import python_to_umlang_print
+from print_converter import isPrint, python_to_umlang_print
 import sys
 from io import StringIO
 
@@ -31,17 +31,17 @@ except:
     print('This python code is invalid.')
     quit()
 
-
+print('어떻게')
 
 python_code_splited = python_code.split('\n')
 line = len(python_code_splited)
 isInPrint = False
 isPrinted = False
 
-# print code
 for i in range(line):
+    # print code
     # check if there is print
-    if 'print(' in python_code_splited[i]:
+    if isPrint(python_code_splited[i]):
         # to prevent case like print("print()"), check if it is in print()
         if not isInPrint:
             isInPrint = True
@@ -71,3 +71,5 @@ for i in range(line):
                         python_to_umlang_print(S)
                         isInPrint = False
                         isPrinted = True
+
+print('이 사람이름이냐ㅋㅋ')

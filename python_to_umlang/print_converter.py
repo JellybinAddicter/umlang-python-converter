@@ -22,3 +22,9 @@ def python_to_umlang_print(parameter):
         # if it isn't last line, print \n with umlang
         if line != len(parameter_lbl)-1:
             print('식'+('.'*10)+'ㅋ')
+
+def isPrint(line):
+    if 'print(' in line:
+        return True
+    else:
+        return False
