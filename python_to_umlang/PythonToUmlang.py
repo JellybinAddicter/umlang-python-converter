@@ -1,6 +1,8 @@
-from print_converter import isPrint, python_to_umlang_print
+from print_converter import isPrint, printParameter, python_to_umlang_print
 import sys
 from io import StringIO
+
+from variable_converter import isVariable
 
 print('input all python code and enter {end} to finish')
 
@@ -34,42 +36,25 @@ except:
 print('어떻게')
 
 python_code_splited = python_code.split('\n')
-line = len(python_code_splited)
-isInPrint = False
+line_count = len(python_code_splited)
 isPrinted = False
+variable_id = 0
 
-for i in range(line):
+for i in range(line_count):
     # print code
     # check if there is print
     if isPrint(python_code_splited[i]):
-        # to prevent case like print("print()"), check if it is in print()
-        if not isInPrint:
-            isInPrint = True
-            
-            if isPrinted:
-                print('식'+('.'*10)+'ㅋ')
+        # to prevent case like print("print()"), check if it is in print()    
+        if isPrinted:
+            print('식'+('.'*10)+'ㅋ')
 
-            # when print() ends in one line
-            if ')' in python_code_splited[i]:
-                python_to_umlang_print(python_code_splited[i])
-                isInPrint = False
-                isPrinted = True
-            else:
-                # S is a variable which store things in print()
-                S = python_code_splited[i]
-                # stack to check where print()'s closing bracket ends
-                stack = [1]
-                for j in range(i+1, line):
-                    S += python_code_splited[j]
-                    if '(' in python_code_splited[j]:
-                        stack.append(0)
-                    
-                    if ')' in python_code_splited[j]:
-                        stack.pop()
-                    
-                    if len(stack) == 0:
-                        python_to_umlang_print(S)
-                        isInPrint = False
-                        isPrinted = True
+        S = printParameter(i, line_count, python_code_splited)
+        python_to_umlang_print(S)
+        isPrinted = True
+
+    # elif isVariable(python_code_splited[i]):
+    #     print('엄', end='')
+    #     print('어'*variable_id)
+    #     variable_id += 1
 
 print('이 사람이름이냐ㅋㅋ')
