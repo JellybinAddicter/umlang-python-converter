@@ -40,7 +40,6 @@ line_count = len(python_code_splited)
 isPrinted = False
 variable_id = 0
 variable_stored = {}
-
 for i in range(line_count):
     # print code
     # check if there is print
